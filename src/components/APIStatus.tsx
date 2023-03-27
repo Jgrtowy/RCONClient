@@ -8,7 +8,8 @@ const APIStatus = () => {
           const startTime = performance.now()
           ;(async () => {
                try {
-                    await axios.get("")
+                    await axios.get("https://api.jgrtowy.xyz/status")
+                    // await axios.get("http://localhost:5000/status")
                     setStatus(`✅ Working!`)
                     setTime(
                          `Took: ${(performance.now() - startTime).toFixed(2)}ms`

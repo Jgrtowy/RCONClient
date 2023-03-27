@@ -8,7 +8,7 @@ type HandleFormProps = {
 const HandleForm = ({ onFormSubmit }: HandleFormProps) => {
      const [formData, setFormData] = useState({
           ip: "",
-          port: 0,
+          port: 25575,
           password: "",
           rememberMe: false,
      })

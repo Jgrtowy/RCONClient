@@ -12,20 +12,34 @@ setDarkMode()
 function App() {
      const [formData, setFormData] = useState({
           ip: "",
-          port: 0,
+          port: 25575,
           password: "",
           remember: false,
      })
 
      const [index, setIndex] = useState(0)
 
+     useEffect(() => {
+          const successfulConnection = localStorage.getItem(
+               "successfulConnection"
+          )
+          if (successfulConnection) {
+               setFormData(JSON.parse(successfulConnection))
+               setIndex(3)
+          }
+     }, [])
+
      const handleFormSubmit = async (data: any) => {
           setIndex(1)
           setFormData(data)
-          if (await RCONConnect(data)) {
+          if (!(await RCONConnect(data, ""))) {
                setIndex(2)
           } else {
                setIndex(3)
+               localStorage.setItem(
+                    "successfulConnection",
+                    JSON.stringify(data)
+               )
           }
      }
      const reconnect = () => {
@@ -36,12 +50,13 @@ function App() {
           <Form handleFormSubmit={handleFormSubmit} />,
           <Connecting />,
           <Error reconnect={reconnect} />,
-          <Console
-               ip={formData.ip}
-               port={formData.port}
-               password={formData.password}
-          />,
+          <Console handleLogOut={() => handleLogOut()} />,
      ])
+
+     const handleLogOut = () => {
+          localStorage.removeItem("successfulConnection")
+          setIndex(0)
+     }
 
      return (
           <div className="App bg-white dark:bg-gray-900 flex flex-col gap-3 text-black dark:text-white justify-center items-center h-screen w-screen text-xl">
@@ -60,7 +75,7 @@ function Error({ reconnect }: any) {
                <h1>❌ Error!</h1>
                <button
                     onClick={reconnect}
-                    className="border bordar-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
+                    className="border border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
                >
                     Reconnect
                </button>
