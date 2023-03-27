@@ -10,6 +10,7 @@ const HandleForm = ({ onFormSubmit }: HandleFormProps) => {
           ip: "",
           port: 0,
           password: "",
+          rememberMe: false,
      })
      const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           const { name, value } = event.target
@@ -22,11 +23,13 @@ const HandleForm = ({ onFormSubmit }: HandleFormProps) => {
           const ip = localStorage.getItem("ip")
           const port = localStorage.getItem("port")
           const password = localStorage.getItem("password")
-          if (ip && port && password) {
+          const rememberMe = localStorage.getItem("rememberMe")
+          if (ip && port && password && rememberMe) {
                setFormData({
                     ip: ip,
                     port: parseInt(port),
                     password: password,
+                    rememberMe: rememberMe == "true" ? true : false,
                })
           }
      }, [])
@@ -44,25 +47,32 @@ const HandleForm = ({ onFormSubmit }: HandleFormProps) => {
                return
           if (formData.port < 1 || formData.port > 65535) return
           if (formData.password.length < 1) return
-          if (checked === true) {
+          if (formData.rememberMe === true) {
                localStorage.setItem("ip", formData.ip)
                localStorage.setItem("port", formData.port.toString())
                localStorage.setItem("password", formData.password)
+               localStorage.setItem(
+                    "rememberMe",
+                    formData.rememberMe.toString()
+               )
           }
-          if (checked === false) {
+          if (formData.rememberMe === false) {
                localStorage.removeItem("ip")
                localStorage.removeItem("port")
                localStorage.removeItem("password")
+               localStorage.removeItem("rememberMe")
           }
           onFormSubmit(formData)
      }
 
-     const [checked, setChecked] = useState(false)
-
      const handleCheckboxChange = (
           event: React.ChangeEvent<HTMLInputElement>
      ) => {
-          setChecked(event.target.checked)
+          const { checked } = event.target
+          setFormData({
+               ...formData,
+               rememberMe: checked,
+          })
      }
 
      return (

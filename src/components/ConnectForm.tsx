@@ -4,6 +4,7 @@ export interface FormProps {
      ip: string
      port: number
      password: string
+     rememberMe: boolean
 }
 
 interface ConnectFormProps {
@@ -73,6 +74,7 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
                          name="remember"
                          id="remember"
                          onChange={handleCheckboxChange}
+                         checked={formData.rememberMe}
                          className="border bordar-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
                     />
                </div>

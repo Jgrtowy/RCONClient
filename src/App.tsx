@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./App.css"
 import APIStatus from "./components/APIStatus"
+import Console from "./components/Console"
 import HandleForm from "./components/HandleForm"
 import { setDarkMode } from "./DarkMode"
 import RCONConnect from "./RCONConnect"
@@ -22,9 +23,9 @@ function App() {
           setIndex(1)
           setFormData(data)
           if (await RCONConnect(data)) {
-               setIndex(3)
-          } else {
                setIndex(2)
+          } else {
+               setIndex(3)
           }
      }
      const reconnect = () => {
@@ -35,6 +36,11 @@ function App() {
           <Form handleFormSubmit={handleFormSubmit} />,
           <Connecting />,
           <Error reconnect={reconnect} />,
+          <Console
+               ip={formData.ip}
+               port={formData.port}
+               password={formData.password}
+          />,
      ])
 
      return (
