@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import "./App.css"
 import APIStatus from "./components/APIStatus"
 import Console from "./components/Console"
+import Footer from "./components/Footer"
 import HandleForm from "./components/HandleForm"
 import { setDarkMode } from "./DarkMode"
 import RCONConnect from "./RCONConnect"
@@ -48,7 +49,7 @@ function App() {
 
      const [elements] = useState([
           <Form handleFormSubmit={handleFormSubmit} />,
-          <Connecting />,
+          <Connecting reconnect={reconnect} />,
           <Error reconnect={reconnect} />,
           <Console handleLogOut={() => handleLogOut()} />,
      ])
@@ -61,12 +62,25 @@ function App() {
      return (
           <div className="App bg-white dark:bg-gray-900 flex flex-col gap-3 text-black dark:text-white justify-center items-center h-screen w-screen text-xl">
                {elements[index]}
+               <div className="absolute bottom-5">
+                    <Footer />
+               </div>
           </div>
      )
 }
 
-function Connecting() {
-     return <div>👀 Trying to connect...</div>
+function Connecting({ reconnect }: any) {
+     return (
+          <>
+               <div>👀 Trying to connect...</div>
+               <button
+                    onClick={reconnect}
+                    className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
+               >
+                    Disconnect
+               </button>
+          </>
+     )
 }
 
 function Error({ reconnect }: any) {
@@ -75,7 +89,7 @@ function Error({ reconnect }: any) {
                <h1>❌ Error!</h1>
                <button
                     onClick={reconnect}
-                    className="border border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
+                    className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
                >
                     Reconnect
                </button>
@@ -86,6 +100,9 @@ function Error({ reconnect }: any) {
 function Form({ handleFormSubmit }: any) {
      return (
           <>
+               <h1 className="absolute top-12 text-4xl font-bold">
+                    🌍 RCON Client
+               </h1>
                <HandleForm onFormSubmit={handleFormSubmit} />
                <br />
                <APIStatus />

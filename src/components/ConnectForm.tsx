@@ -30,7 +30,7 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
                          type="text"
                          id="ip"
                          name="ip"
-                         className="border border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
+                         className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
                          value={formData.ip}
                          onChange={onInputChange}
                     />
@@ -43,7 +43,7 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
                          type="number"
                          id="port"
                          name="port"
-                         className="border border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
+                         className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
                          style={{
                               WebkitAppearance: "none",
                               MozAppearance: "textfield",
@@ -62,7 +62,7 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
                          id="password"
                          onChange={onInputChange}
                          value={formData.password}
-                         className="border border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
+                         className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
                     />
                </div>
                <div className="flex gap-5 items-center justify-center w-96 ">
@@ -75,14 +75,14 @@ const ConnectForm: React.FC<ConnectFormProps> = ({
                          id="remember"
                          onChange={handleCheckboxChange}
                          checked={formData.rememberMe}
-                         className="border border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
+                         className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
                     />
                </div>
                <div className="flex gap-5 items-center justify-center">
                     <input
                          type="submit"
                          value="Connect"
-                         className="border border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
+                         className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
                     />
                </div>
           </form>
