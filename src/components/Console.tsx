@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios"
 import React, { useEffect, useRef, useState } from "react"
 import RCONConnect from "../RCONConnect"
 
@@ -9,13 +8,6 @@ export default function Console({ handleLogOut }: any, data: any) {
      const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           const { value } = event.target
           setCommand(value)
-     }
-
-     interface requestData {
-          ip: string
-          port: number
-          password: string
-          command: string
      }
 
      const handleSubmit = (
@@ -32,10 +24,7 @@ export default function Console({ handleLogOut }: any, data: any) {
                } else {
                     setResponse([
                          ...responses,
-                         `[${date.toLocaleTimeString()}]   ${data.replace(
-                              "\u001b[0m",
-                              ""
-                         )}`,
+                         `[${date.toLocaleTimeString()}]   ${data}`,
                     ])
                }
           })
