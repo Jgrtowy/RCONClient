@@ -2,7 +2,7 @@ import React from "react"
 
 export default function Footer() {
      return (
-          <div className="px-10 py-1 border border-gray-50 rounded-lg">
+          <div className="px-8 flex justify-center items-center py-1 border border-gray-50 rounded-lg text-base">
                <h1>
                     <a
                          href="https://github.com/Jgrtowy/RCONClient/blob/master/LICENSE"
