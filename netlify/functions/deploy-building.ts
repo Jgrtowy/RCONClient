@@ -14,6 +14,8 @@ const handler: Handler = async (
      context: HandlerContext
 ) => {
      try {
+          console.log(event.body)
+
           await axios.post(
                `https://api.jgrtowy.xyz/netlify?key=${process.env.NETLIFY_KEY}`,
                {
