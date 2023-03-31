@@ -29,7 +29,6 @@ const handler: Handler = async (
                }
           )
      } catch (e) {
-          console.log(e)
           return {
                statusCode: 500,
           }
