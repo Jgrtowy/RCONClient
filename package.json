@@ -6,7 +6,8 @@
      "scripts": {
           "dev": "vite",
           "build": "tsc && vite build",
-          "preview": "vite preview"
+          "preview": "vite preview",
+          "deploy-dev": "netlify build && netlify deploy"
      },
      "dependencies": {
           "@netlify/functions": "^1.4.0",

@@ -1,0 +1,2 @@
+[build]
+  functionsSource = "netlify/functions"
