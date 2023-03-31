@@ -10,9 +10,8 @@ const handler: Handler = async (
      try {
           await axios.post(
                `https://api.jgrtowy.xyz/netlify?key=${process.env.NETLIFY_KEY}`,
-               // `http://localhost:5000/netlify?key=${process.env.NETLIFY_KEY}`,
                {
-                    eventType: "deploy-building",
+                    eventType: "deploy-failed",
                     eventBody: JSON.parse(event.body || "{}"),
                },
                {
