@@ -12,12 +12,17 @@ const HandleForm = ({ onFormSubmit }: HandleFormProps) => {
           password: "",
           rememberMe: false,
      })
+     const [error, setError] = useState({
+          ip: false,
+          port: false,
+     })
      const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           const { name, value } = event.target
           setFormData({
                ...formData,
                [name]: value,
           })
+          regexTest()
      }
      useEffect(() => {
           const ip = localStorage.getItem("ip")
@@ -35,18 +40,7 @@ const HandleForm = ({ onFormSubmit }: HandleFormProps) => {
      }, [])
      const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault()
-          if (
-               !/^(?:\d{1,3}\.){3}\d{1,3}$/.test(formData.ip) &&
-               !/^(?:[a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}$/.test(
-                    formData.ip
-               ) &&
-               !/^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/.test(
-                    formData.ip
-               )
-          )
-               return
-          if (formData.port < 1 || formData.port > 65535) return
-          if (formData.password.length < 1) return
+          if (!regexTest()) return
           if (formData.rememberMe === true) {
                localStorage.setItem("ip", formData.ip)
                localStorage.setItem("port", formData.port.toString())
@@ -74,6 +68,43 @@ const HandleForm = ({ onFormSubmit }: HandleFormProps) => {
                rememberMe: checked,
           })
      }
+     const regexTest = () => {
+          if (
+               !/^(?:\d{1,3}\.){3}\d{1,3}$/.test(formData.ip) &&
+               !/^(?:[a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}$/.test(
+                    formData.ip
+               ) &&
+               !/^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/.test(
+                    formData.ip
+               )
+          ) {
+               setError((prev) => ({
+                    ...prev,
+                    ip: true,
+               }))
+          } else {
+               setError((prev) => ({
+                    ...prev,
+                    ip: false,
+               }))
+          }
+
+          if (formData.port < 1 || formData.port > 65535) {
+               setError((prev) => ({
+                    ...prev,
+                    port: true,
+               }))
+          } else {
+               setError((prev) => ({
+                    ...prev,
+                    port: false,
+               }))
+          }
+          if (error.ip || error.port) {
+               return false
+          }
+          return true
+     }
 
      return (
           <>
@@ -82,6 +113,7 @@ const HandleForm = ({ onFormSubmit }: HandleFormProps) => {
                     onSubmit={handleSubmit}
                     onInputChange={handleInputChange}
                     handleCheckboxChange={handleCheckboxChange}
+                    error={error}
                />
                <div>
                     <h1></h1>

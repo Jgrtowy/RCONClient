@@ -1,3 +1,4 @@
+import { dir } from "console"
 import React, { useEffect, useRef, useState } from "react"
 import RCONConnect from "../RCONConnect"
 import options from "./options.json"
@@ -64,7 +65,6 @@ export default function Console({ handleLogOut }: any, data: any) {
           event.preventDefault()
           RCONConnect(creds, command).then((res: any) => {
                const data: string = res.data
-
                if (data == "\u001b[0m") {
                     console.log("No response")
                } else {
@@ -98,7 +98,7 @@ export default function Console({ handleLogOut }: any, data: any) {
                <div className="absolute top-5 right-5">
                     <button
                          onClick={handleLogOut}
-                         className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
+                         className="border transition border-black dark:border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600 hover:bg-gray-200 outline-none"
                     >
                          Log out
                     </button>
@@ -121,10 +121,10 @@ export default function Console({ handleLogOut }: any, data: any) {
                                    onKeyDown={handleKeyDown}
                                    ref={inputRef}
                                    autoComplete="off"
-                                   className="border transition w-1/2 border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none"
+                                   className="border transition w-1/2 border-black dark:border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:focus:bg-gray-700 outline-none focus:bg-gray-200"
                               />
                               {suggestions.length > 0 && (
-                                   <ul className="text-left w-1/2 px-2 mt-1 border border-gray-500 rounded-lg relative z-10 dark:bg-gray-900">
+                                   <ul className="text-left w-1/2 px-2 mt-1 border border-black dark:border-gray-500 rounded-lg relative z-10 dark:bg-gray-900">
                                         {suggestions.map((option) => (
                                              <li
                                                   key={option}
@@ -142,7 +142,7 @@ export default function Console({ handleLogOut }: any, data: any) {
                </div>
                <div className="flex flex-col w-full justify-center items-center gap-5">
                     <div
-                         className="relative z-0 border w-3/4 h-52 border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white outline-none text-sm overflow-y-auto overflow-x-hidden text-left flex flex-col"
+                         className="relative z-0 border w-3/4 h-52 dark:border-gray-50 border-black rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white outline-none text-sm overflow-y-auto overflow-x-hidden text-left flex flex-col"
                          ref={divRef}
                     >
                          {responses.map((response, index) => (
@@ -151,7 +151,7 @@ export default function Console({ handleLogOut }: any, data: any) {
                     </div>
                     <button
                          onClick={() => setResponse([])}
-                         className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
+                         className="border transition border-black dark:border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600 hover:bg-gray-200"
                     >
                          Clear Console
                     </button>

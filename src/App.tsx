@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import "./App.css"
+import { setDarkMode } from "./DarkMode"
+import RCONConnect from "./RCONConnect"
 import APIStatus from "./components/APIStatus"
 import Console from "./components/Console"
 import Footer from "./components/Footer"
 import HandleForm from "./components/HandleForm"
-import { setDarkMode } from "./DarkMode"
-import RCONConnect from "./RCONConnect"
-import viteLogo from "/vite.svg"
 
 setDarkMode()
 
@@ -33,6 +32,8 @@ function App() {
      const handleFormSubmit = async (data: any) => {
           setIndex(1)
           setFormData(data)
+
+          const connection = await RCONConnect(data, "")
           if (!(await RCONConnect(data, ""))) {
                setIndex(2)
           } else {
@@ -60,7 +61,7 @@ function App() {
      }
 
      return (
-          <div className="App bg-white dark:bg-gray-900 flex flex-col gap-3 text-black dark:text-white justify-center items-center h-screen w-screen text-xl">
+          <div className="App bg-gray-300 dark:bg-gray-900 flex flex-col gap-3 text-black dark:text-white justify-center items-center h-screen w-screen text-xl">
                {elements[index]}
                <div className="absolute bottom-5">
                     <Footer />
@@ -75,7 +76,7 @@ function Connecting({ reconnect }: any) {
                <div>👀 Trying to connect...</div>
                <button
                     onClick={reconnect}
-                    className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
+                    className="border transition border-black dark:border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
                >
                     Disconnect
                </button>
@@ -86,10 +87,10 @@ function Connecting({ reconnect }: any) {
 function Error({ reconnect }: any) {
      return (
           <div>
-               <h1>❌ Error!</h1>
+               <h1 className="text-center">❌ Error!</h1>
                <button
                     onClick={reconnect}
-                    className="border transition border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:hover:bg-gray-600"
+                    className="border transition border-black dark:border-gray-50 rounded-lg py-1 px-2 bg-white dark:bg-gray-900 text-black hover:bg-gray-200 dark:text-white dark:hover:bg-gray-600"
                >
                     Reconnect
                </button>
